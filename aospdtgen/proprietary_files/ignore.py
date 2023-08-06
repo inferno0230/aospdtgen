@@ -673,4 +673,8 @@ def is_blob_allowed(file: Path) -> bool:
 		if pattern.match(str(file)):
 			return False
 
+	# Check if the file is a symlink and its target exists
+	if file.is_symlink() and not os.path.exists(file.resolve()):
+	        return False
+
 	return True
